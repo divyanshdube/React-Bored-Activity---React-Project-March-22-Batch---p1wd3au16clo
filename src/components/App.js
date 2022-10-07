@@ -6,19 +6,19 @@ const Loader = () => <div id="loader">Loading...</div>;
 const App = () => {
   function makeURL(type) {
     console.log(type);
-    return "http://www.boredapi.com/api/activity?type=${type}";
+    return `https://www.boredapi.com/api/activity?type=${type}`;
   }
 
-  const [activity, isSetActivity] = useState(null);
+  const [activity, setActivity] = useState(null);
 
   async function getResponse(value) {
-    isSetActivity(null);
+    setActivity(null);
 
     let result = makeURL(value);
 
-    const output = await fetch(result);
-    let data = await output.json();
-    isSetActivity(data.activity);
+    const response = await fetch(result);
+    let data = await response.json();
+    setActivity(data.activity);
   }
 
   useEffect(() => getResponse("education"), []);
